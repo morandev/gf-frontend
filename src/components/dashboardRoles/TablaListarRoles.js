@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import RegistroRol from "./RegistroRol";
 import { obtenerRoles } from '../../services/rolesService';
 import TablaStyles from "./TablaListarRoles.module.css";
+import { useAuth } from '../../hooks/useAuth'
 
 const TablaListarRoles = ({toggleRol, setToggleRol}) => {
     const [roles, setRoles] = useState([]);
+    const { config } = useAuth();
 
     const getData = async () => {
-        const rsp = await obtenerRoles();
+        const rsp = await obtenerRoles(config);
         setRoles(rsp.data)
     }
 

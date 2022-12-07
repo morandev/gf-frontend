@@ -16,7 +16,6 @@ const RegisterForm = () => {
     const doRegister = async () => {
         try {
             const rps = await register(auth, null)
-            console.log('mira perri le mande esto: ', auth);
             
             if (rps.status === 201) {
                 /*

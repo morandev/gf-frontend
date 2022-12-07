@@ -14,11 +14,10 @@ export const actualizarGrupo = (id, data, config) => {
     return axios.put(baseUrl + 'grupos-familiares/' + id, data, config);
 }
 
-export const obtenerGrupos = () => {
-   return axios.get(baseUrl + 'grupos-familiares')
+export const obtenerGrupos = (config) => {
+   return axios.get(baseUrl + 'grupos-familiares', config)
 }
 
-export const obtenerGrupo = (id) => {
-    return axios.get(baseUrl + 'grupos-familiares/' + id, null);
+export const obtenerGrupo = (id, config) => {
+    return axios.get(baseUrl + 'grupos-familiares/' + id, config);
 }
-

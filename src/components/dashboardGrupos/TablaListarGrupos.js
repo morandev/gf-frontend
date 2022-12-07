@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import RegistroGrupo from "./RegistroGrupo";
 import { obtenerGrupos } from '../../services/gruposService';
 import TablaStyles from "./TablaListarGrupos.module.css";
+import { useAuth } from '../../hooks/useAuth'
 
 const TablaListarGrupos = ({ toggleGrupo, setToggleGrupo }) => {
     const [grupos, setGrupos] = useState([]);
+    const { config } = useAuth();
 
     const getData = async() => {
-        const rsp = await obtenerGrupos();
+        const rsp = await obtenerGrupos(config);
         setGrupos(rsp.data)
     }
 

@@ -1,12 +1,14 @@
 import { faFloppyDisk, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { borrarRol, actualizarRol } from '../../services/rolesService'
+import { useAuth } from '../../hooks/useAuth'
 
 const RegistroRol = ({ id, descripcion = '', setToggleRol }) => {
+    const { config } = useAuth();
 
     const handleBorrar = async () => {
         try {
-            await borrarRol(id, null);
+            await borrarRol(id, config);
             setToggleRol(t => !t)
         } catch (e) {
             if (e.code === "ERR_BAD_REQUEST") {
@@ -35,7 +37,7 @@ const RegistroRol = ({ id, descripcion = '', setToggleRol }) => {
                 "descripcion": celdaDescripcion.innerHTML.trim()
             }
 
-            await actualizarRol(id, data, null);
+            await actualizarRol(id, data, config);
             setToggleRol(t => !t)
         } catch ({code}) {
             alert('error: '+code);

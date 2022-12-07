@@ -1,13 +1,14 @@
 import { useForm } from "../../hooks/useForm"
 import { obtenerIntegrante } from '../../services/integrantesService'
+import { useAuth } from '../../hooks/useAuth'
 
 const FormularioBuscarIntegrante = () => {
-
     const { formState, onInputChange } = useForm({ id: '' });
+    const { config } = useAuth();
 
     const getData = async (id) => {
         try {
-            await obtenerIntegrante(id);
+            await obtenerIntegrante(id, config);
             const row = document.querySelector(`.integrante-${id}`);
 
             row.classList.add('table-warning');

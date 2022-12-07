@@ -1,8 +1,11 @@
 import Select from "react-select";
 import { useForm } from "../../hooks/useForm";
 import { crearGrupo } from "../../services/gruposService";
+import { useAuth } from '../../hooks/useAuth'
 
 const FormularioCrearGrupo = ({ setToggleGrupo }) => {
+    const { config } = useAuth();
+
     const { formState, onInputChange, setFormState } = useForm({
         descripcion: '',
         barrioId: '',
@@ -11,7 +14,7 @@ const FormularioCrearGrupo = ({ setToggleGrupo }) => {
 
     const crearDataGrupo = async () => {
         try {
-            await crearGrupo(formState, null);
+            await crearGrupo(formState, config);
             setToggleGrupo(t => !t)
         } catch (e) {
             console.log(e);

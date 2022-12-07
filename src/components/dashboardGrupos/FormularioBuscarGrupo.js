@@ -1,13 +1,14 @@
 import { useForm } from "../../hooks/useForm"
 import { obtenerGrupo } from '../../services/gruposService'
+import { useAuth } from '../../hooks/useAuth'
 
 const FormularioBuscarGrupo = () => {
-
+    const { config } = useAuth();
     const { formState, onInputChange } = useForm({id:''});
 
     const getData = async(id) => {
         try {
-            await obtenerGrupo(id);
+            await obtenerGrupo(id, config);
             const row = document.querySelector( `.grupo-${id}` );
 
             row.classList.add( 'table-warning' );

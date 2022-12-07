@@ -1,13 +1,15 @@
 import { useForm } from "../../hooks/useForm"
 import { obtenerRol } from '../../services/rolesService'
+import { useAuth } from '../../hooks/useAuth'
 
 const FormularioBuscarRol = () => {
 
     const { formState, onInputChange } = useForm({id:''});
+    const { config } = useAuth();
 
     const getData = async(id) => {
         try {
-            await obtenerRol(id);
+            await obtenerRol(id, config);
             const row = document.querySelector( `.rol-${id}` );
 
             row.classList.add( 'table-warning' );

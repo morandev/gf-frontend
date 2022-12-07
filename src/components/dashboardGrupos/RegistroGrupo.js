@@ -1,12 +1,14 @@
 import { faFloppyDisk, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { borrarGrupo, actualizarGrupo } from '../../services/gruposService'
+import { useAuth } from '../../hooks/useAuth'
 
 const RegistroGrupo = ({ id, descripcion = '', barrioId = '', fechaAct = {}, setToggleGrupo }) => {
+    const { config } = useAuth();
 
     const handleBorrar = async () => {
         try {
-            await borrarGrupo(id, null);
+            await borrarGrupo(id, config);
             setToggleGrupo(t => !t)
         } catch (e) {
             if (e.code === "ERR_BAD_REQUEST") {
@@ -43,7 +45,7 @@ const RegistroGrupo = ({ id, descripcion = '', barrioId = '', fechaAct = {}, set
                 "fechaAct": new Date().toLocaleDateString('en-CA'),
             }
 
-            await actualizarGrupo(id, data, null);
+            await actualizarGrupo(id, data, config);
             setToggleGrupo(t => !t)
         } catch ({code}) {
             alert('error: '+code);

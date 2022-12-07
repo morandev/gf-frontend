@@ -14,11 +14,10 @@ export const actualizarIntegrante = (id, data, config) => {
     return axios.put(baseUrl + 'integrantes/' + id, data, config);
 }
 
-export const obtenerIntegrantes = () => {
-   return axios.get(baseUrl + 'integrantes')
+export const obtenerIntegrantes = (config) => {
+   return axios.get(baseUrl + 'integrantes', config)
 }
 
-export const obtenerIntegrante = (id) => {
-    return axios.get(baseUrl + 'integrantes/' + id, null);
+export const obtenerIntegrante = (id, config) => {
+    return axios.get(baseUrl + 'integrantes/' + id, config);
 }
-

@@ -14,11 +14,11 @@ export const actualizarRol = (id, data, config) => {
     return axios.put(baseUrl + 'roles/' + id, data, config);
 }
 
-export const obtenerRoles = () => {
-   return axios.get(baseUrl + 'roles')
+export const obtenerRoles = (config) => {
+   return axios.get(baseUrl + 'roles', config)
 }
 
-export const obtenerRol = (id) => {
-    return axios.get(baseUrl + 'roles/' + id, null);
+export const obtenerRol = (id, config) => {
+    return axios.get(baseUrl + 'roles/' + id, config);
 }
 

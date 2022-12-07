@@ -5,6 +5,7 @@ import { crearIntegrante } from "../../services/integrantesService";
 import { obtenerRol, obtenerRoles } from "../../services/rolesService";
 import { obtenerGrupo, obtenerGrupos } from "../../services/gruposService";
 import promisesOptions from "../../utils/promisesOptions"
+import { useAuth } from '../../hooks/useAuth'
 
 const FormularioCrearIntegrante = ({ setToggleIntegrante }) => {
     const { formState, setFormState, onInputChange } = useForm({
@@ -15,6 +16,7 @@ const FormularioCrearIntegrante = ({ setToggleIntegrante }) => {
         rol: 'ausente',
         grupoFamiliar: 'ausente',
     });
+    const { config } = useAuth();
 
     const crearDataIntegrante = async () => {
         try {
@@ -34,7 +36,7 @@ const FormularioCrearIntegrante = ({ setToggleIntegrante }) => {
                 return
             }
 
-            await crearIntegrante(formState, null);
+            await crearIntegrante(formState, config);
 
             setToggleIntegrante(t => !t)
         } catch ({ code, response }) {
@@ -47,14 +49,14 @@ const FormularioCrearIntegrante = ({ setToggleIntegrante }) => {
     }
 
     const handleRolChange = async ({ value }) => {
-        const rolSelected = await obtenerRol(value);
+        const rolSelected = await obtenerRol(value, config);
 
         setFormState((prevState) => ({ ...prevState, rol: rolSelected.data }));
     };
 
 
     const handleGrupoChange = async ({ value }) => {
-        const grupoSelected = await obtenerGrupo(value);
+        const grupoSelected = await obtenerGrupo(value, config);
 
         setFormState((prevState) => ({ ...prevState, grupoFamiliar: grupoSelected.data }));
     };
@@ -71,6 +73,14 @@ const FormularioCrearIntegrante = ({ setToggleIntegrante }) => {
     const onSubmit = (e) => {
         e.preventDefault();
         crearDataIntegrante();
+    }
+
+    const obtenerGruposWrap = async() => {
+        return obtenerGrupos(config)
+    }
+
+    const obtenerRolesWrap = async() => {
+        return obtenerRoles(config)
     }
 
     return (
@@ -128,7 +138,7 @@ const FormularioCrearIntegrante = ({ setToggleIntegrante }) => {
                         <AsyncSelect
                             cacheOptions
                             defaultOptions
-                            loadOptions={promisesOptions(obtenerRoles)}
+                            loadOptions={promisesOptions(obtenerRolesWrap)}
                             onChange={handleRolChange}
                             placeholder="Elija un Rol"
                         />
@@ -140,7 +150,7 @@ const FormularioCrearIntegrante = ({ setToggleIntegrante }) => {
                         <AsyncSelect
                             cacheOptions
                             defaultOptions
-                            loadOptions={promisesOptions(obtenerGrupos)}
+                            loadOptions={promisesOptions(obtenerGruposWrap)}
                             onChange={handleGrupoChange}
                             placeholder="Elija un Grupo"
                         />

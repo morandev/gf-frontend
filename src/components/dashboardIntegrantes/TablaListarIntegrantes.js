@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import RegistroIntegrante from "./RegistroIntegrante";
 import { obtenerIntegrantes } from '../../services/integrantesService';
 import TablaStyles from "./TablaListarIntegrantes.module.css";
+import { useAuth } from '../../hooks/useAuth'
 
 const TablaListarIntegrantes = ({ toggleIntegrante, setToggleIntegrante }) => {
     const [integrantes, setIntegrantes] = useState([]);
+    const { config } = useAuth();
 
     const getData = async () => {
-        const rsp = await obtenerIntegrantes();
+        const rsp = await obtenerIntegrantes(config);
         setIntegrantes(rsp.data)
     }
 

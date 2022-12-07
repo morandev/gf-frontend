@@ -1,12 +1,14 @@
 import { useForm } from "../../hooks/useForm";
 import { crearRol } from "../../services/rolesService";
+import { useAuth } from '../../hooks/useAuth'
 
 const FomularioCrearRol = ({ setToggleRol }) => {
     const { formState, onInputChange } = useForm({descripcion:''});
+    const { config } = useAuth();
 
     const crearDataRol = async () => {
         try {
-            await crearRol(formState, null);
+            await crearRol(formState, config);
             setToggleRol(t=>!t)
         } catch (e) {
             console.log(e);

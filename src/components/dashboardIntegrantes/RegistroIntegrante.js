@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { obtenerGrupo } from "../../services/gruposService"
 import { obtenerRol } from "../../services/rolesService"
 import { borrarIntegrante, actualizarIntegrante } from '../../services/integrantesService'
+import { useAuth } from '../../hooks/useAuth'
 
 const RegistroIntegrante = ({
     id,
@@ -13,10 +14,11 @@ const RegistroIntegrante = ({
     rol = {},
     grupoFamiliar = {},
     setToggleIntegrante }) => {
-
+    const { config } = useAuth();
+        
     const handleBorrar = async () => {
         try {
-            await borrarIntegrante(id, null);
+            await borrarIntegrante(id, config);
             setToggleIntegrante(t => !t)
         } catch ({code}) {
             alert('error: '+code);
@@ -69,10 +71,10 @@ const RegistroIntegrante = ({
             let rspGF = { data: {} };
 
             if (rol.id) 
-                rspRol = await obtenerRol(rol.id);
+                rspRol = await obtenerRol(rol.id, config);
                 
             if (grupoFamiliar.id)
-                rspGF = await obtenerGrupo(grupoFamiliar.id);
+                rspGF = await obtenerGrupo(grupoFamiliar.id, config);
 
             const data = {
                 "dni": celdaDni.innerHTML,
@@ -83,7 +85,7 @@ const RegistroIntegrante = ({
                 "grupoFamiliar": rspGF.data,
             }
 
-            await actualizarIntegrante(id, data, null);
+            await actualizarIntegrante(id, data, config);
             setToggleIntegrante(t => !t)
         } catch ({code}) {
             alert('error: '+code);
