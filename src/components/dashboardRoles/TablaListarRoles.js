@@ -17,7 +17,7 @@ const TablaListarRoles = ({toggleRol, setToggleRol}) => {
 
     return (
         <div className={`my-3 bg-secondary bg-gradient rounded shadow
-                        order-2 order-sm-2 order-md-1 col-sm-7 col-lg-8 table-responsive ${TablaStyles.tabla}`}
+                        order-2 order-sm-2 order-md-1 col-sm-7 col-md-8 col-lg-8 table-responsive ${TablaStyles.tabla}`}
         >
             <table className="table table-dark table-bordered">
                 <caption>Lista de roles</caption>

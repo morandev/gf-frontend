@@ -1,14 +1,14 @@
 import { useForm } from "../../hooks/useForm"
-import { obtenerRol } from '../../services/rolesService'
+import { obtenerGrupo } from '../../services/gruposService'
 
-const FormularioBuscarRol = () => {
+const FormularioBuscarGrupo = () => {
 
     const { formState, onInputChange } = useForm({id:''});
 
     const getData = async(id) => {
         try {
-            await obtenerRol(id);
-            const row = document.querySelector( `.rol-${id}` );
+            await obtenerGrupo(id);
+            const row = document.querySelector( `.grupo-${id}` );
 
             row.classList.add( 'table-warning' );
             setTimeout(() => {
@@ -18,7 +18,7 @@ const FormularioBuscarRol = () => {
             if (code === "ERR_BAD_REQUEST") {
                 const { data } = response;
                 if (data.code === 404)
-                    alert(`No existe Rol con ID: ${id}`)
+                    alert(`No existe Grupo Familiar con ID: ${id}`)
                 if (data.code === 400)
                     alert(`Por favor, ingrese un ID valido ex. 1`)
             }
@@ -38,14 +38,14 @@ const FormularioBuscarRol = () => {
                             col-sm-10 flex-sm-row justify-content-sm-end"
                 onSubmit={onSubmit}
             >
-                <div className="pt-1 col-sm-5 col-md-4 col-lg-3 text-center">
-                    <p className="h3 fw-bold border-bottom border-warning">Buscar Rol</p>
+                <div className="pt-1 col-sm-5 col-md-4 col-lg-4 text-center">
+                    <p className="h3 fw-bold border-bottom border-warning">Buscar Grupo Familiar</p>
                 </div>
                 <div className="col-8 px-1 col-sm-4 col-md-3">
                     <input
                         type="text"
                         className="form-control"
-                        placeholder="Ingrese id o descripcion"
+                        placeholder="Ingrese id"
                         name="id"
                         value={formState.id}
                         min="1"
@@ -65,4 +65,4 @@ const FormularioBuscarRol = () => {
     )
 }
 
-export default FormularioBuscarRol
+export default FormularioBuscarGrupo

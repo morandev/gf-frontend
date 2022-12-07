@@ -1,24 +1,24 @@
 import { useForm } from "../../hooks/useForm"
-import { obtenerRol } from '../../services/rolesService'
+import { obtenerIntegrante } from '../../services/integrantesService'
 
-const FormularioBuscarRol = () => {
+const FormularioBuscarIntegrante = () => {
 
-    const { formState, onInputChange } = useForm({id:''});
+    const { formState, onInputChange } = useForm({ id: '' });
 
-    const getData = async(id) => {
+    const getData = async (id) => {
         try {
-            await obtenerRol(id);
-            const row = document.querySelector( `.rol-${id}` );
+            await obtenerIntegrante(id);
+            const row = document.querySelector(`.integrante-${id}`);
 
-            row.classList.add( 'table-warning' );
+            row.classList.add('table-warning');
             setTimeout(() => {
-              row.classList.remove( 'table-warning' );
+                row.classList.remove('table-warning');
             }, 1000);
         } catch ({ code, response }) {
             if (code === "ERR_BAD_REQUEST") {
                 const { data } = response;
                 if (data.code === 404)
-                    alert(`No existe Rol con ID: ${id}`)
+                    alert(`No existe integrante con ID: ${id}`)
                 if (data.code === 400)
                     alert(`Por favor, ingrese un ID valido ex. 1`)
             }
@@ -33,19 +33,19 @@ const FormularioBuscarRol = () => {
     return (
         <div className="d-flex justify-content-center my-2 bg-secondary bg-gradient
                         px-1 shadow rounded order-sm-0 col-sm-12 justify-content-sm-end">
-            <form 
+            <form
                 className="d-flex col-12 flex-column justify-content-center align-items-center
                             col-sm-10 flex-sm-row justify-content-sm-end"
                 onSubmit={onSubmit}
             >
                 <div className="pt-1 col-sm-5 col-md-4 col-lg-3 text-center">
-                    <p className="h3 fw-bold border-bottom border-warning">Buscar Rol</p>
+                    <p className="h3 fw-bold border-bottom border-warning">Buscar Integrante</p>
                 </div>
                 <div className="col-8 px-1 col-sm-4 col-md-3">
                     <input
                         type="text"
                         className="form-control"
-                        placeholder="Ingrese id o descripcion"
+                        placeholder="Ingrese id"
                         name="id"
                         value={formState.id}
                         min="1"
@@ -65,4 +65,4 @@ const FormularioBuscarRol = () => {
     )
 }
 
-export default FormularioBuscarRol
+export default FormularioBuscarIntegrante

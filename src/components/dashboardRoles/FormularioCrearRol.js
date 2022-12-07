@@ -21,7 +21,7 @@ const FomularioCrearRol = ({ setToggleRol }) => {
     return (
         <div
             className="my-3 bg-secondary bg-gradient py-4 rounded shadow
-                        rounded order-sm-1 order-sm-2 col-sm-4 col-lg-3">
+                        rounded order-sm-1 col-sm-4 col-lg-3">
             <form
                 className="d-flex flex-column align-items-center mx-auto
                             flex-sm-row flex-sm-wrap flex-sm-column"
@@ -30,7 +30,7 @@ const FomularioCrearRol = ({ setToggleRol }) => {
                 <div>
                     <p className="h3 fw-bold border-bottom border-success">Crear Nuevo Rol</p>
                 </div>
-                <div className="my-2 col-sm-10">
+                <div className="my-2 col-sm-11">
                     <label className="form-label text-body fw-bold">
                         Descripcion:
                     </label>

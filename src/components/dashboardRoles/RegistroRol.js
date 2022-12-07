@@ -21,14 +21,24 @@ const RegistroRol = ({ id, descripcion = '', setToggleRol }) => {
         try {
             const celdaDescripcion = document.querySelector(`.rol-${id}-descripcion`);
 
+            if (!isNaN(celdaDescripcion.innerHTML)) {
+                alert('La Descripcion debe ser texto!')
+                return
+            }
+
+            if (celdaDescripcion.innerHTML.length>100) {
+                alert('Descripcion muy extensa')
+                return
+            } 
+
             data = {
-                "descripcion": celdaDescripcion.innerHTML
+                "descripcion": celdaDescripcion.innerHTML.trim()
             }
 
             await actualizarRol(id, data, null);
             setToggleRol(t => !t)
-        } catch (e) {
-            console.log(e);
+        } catch ({code}) {
+            alert('error: '+code);
         }
     }
 

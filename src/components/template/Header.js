@@ -41,7 +41,7 @@ const Header = () => {
                             <Link
                                 className="btn btn-dark w-100 border border-top-0 
                                     border-secondary border-2 rounded-bottom"
-                                to="/dashboard/roles"
+                                to="/dashboard/integrantes"
                             >
                                 Integrantes
                             </Link>
@@ -50,7 +50,7 @@ const Header = () => {
                             <Link
                                 className="btn btn-dark w-100 border border-top-0 
                                     border-secondary border-2 rounded-bottom text-wrap"
-                                to="/dashboard/roles"
+                                to="/dashboard/grupos"
                             >
                                 Grupos Familiares
                             </Link>

@@ -2,6 +2,8 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
 import InicioPage from './pages/inicioPage/InicioPage'
 import RegisterPage from "./pages/registroPage/RegisterPage"
 import RolesPage from './pages/rolesPage/RolesPage'
+import IntegrantesPage from './pages/integrantesPage/IntegrantesPage'
+import GrupoFamiliarPage from './pages/grupoFamiliarPage/GrupoFamiliarPage'
 import { AuthProvider } from './context/AuthProvider'
 import RutaProtegida from './components/RutaProtegida'
 
@@ -17,6 +19,22 @@ const App = () => {
             element={
               <RutaProtegida>
                 <RolesPage />
+              </RutaProtegida>
+            }
+          />
+          <Route
+            path='dashboard/integrantes'
+            element={
+              <RutaProtegida>
+                <IntegrantesPage />
+              </RutaProtegida>
+            }
+          />
+          <Route
+            path='dashboard/grupos'
+            element={
+              <RutaProtegida>
+                <GrupoFamiliarPage />
               </RutaProtegida>
             }
           />
